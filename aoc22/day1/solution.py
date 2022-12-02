@@ -5,7 +5,6 @@ try:
     script_path = os.path.dirname(__file__)
 except:
     script_path = os.getcwd()
-    
 sys.dont_write_bytecode = True
 sys.path.insert(0, os.path.dirname(script_path) + "\\utils")
 
@@ -43,7 +42,6 @@ def solution_part_2():
 
 
 if __name__ == '__main__':
-    
 
     print('Part 1:', solution_part_1())
     print()
