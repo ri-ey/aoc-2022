@@ -1,5 +1,6 @@
 def read_input(filepath, part_2 = False):
     filepath = filepath + '\\input.txt'
+    filepath = filepath.replace('\\', '/')
     if part_2:
         filepath = filepath.replace('.txt', '2.txt')
     with open(filepath, 'r') as file:
