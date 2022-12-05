@@ -1,12 +1,14 @@
 import os
 import sys
+import time
 
 try:
     script_path = os.path.dirname(__file__)
 except NameError:
     script_path = os.getcwd()
 sys.dont_write_bytecode = True
-sys.path.insert(0, os.path.dirname(script_path) + "\\utils")
+lib_path = (os.path.dirname(script_path) + "\\utils").replace('\\', '/')
+sys.path.insert(0, lib_path)
 
 import utils
 
@@ -38,10 +40,14 @@ def solution_part_2():
                 comp_b = comp_b.replace(char, '')
     return score
 
+def main():
+    t0 = time.perf_counter()
+    print('Part 1:', solution_part_1())
+    print(f't(s) = {time.perf_counter() - t0:.3f}')
+    t0 = time.perf_counter()
+    print()
+    print('Part 2:', solution_part_2())
+    print(f't(s) = {time.perf_counter() - t0:.3f}')
 
 if __name__ == '__main__':
-    
-    print('Part 1:', solution_part_1())
-    print(os.path.abspath(""))
-    print('Part 2:', solution_part_2())
-
+    main()

@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 
 try:
     script_path = os.path.dirname(__file__)
@@ -38,9 +39,14 @@ def solution_part_2():
             score += 1
     return score
 
-if __name__ == '__main__':
-    
+def main():
+    t0 = time.perf_counter()
     print('Part 1:', solution_part_1())
+    print(f't(s) = {time.perf_counter() - t0:.3f}')
+    t0 = time.perf_counter()
     print()
     print('Part 2:', solution_part_2())
+    print(f't(s) = {time.perf_counter() - t0:.3f}')
 
+if __name__ == '__main__':
+    main()
