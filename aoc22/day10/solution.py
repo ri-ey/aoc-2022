@@ -38,26 +38,26 @@ def solution_part_1():
 
     
 def solution_part_2():
-    data = utils.read_input(script_path,1)
+    data = utils.read_input(script_path,0)
     data = data.split('\n')
     output = ['.'*41 for _ in range(6)]
     cycle = 0
     sprite_pos = [0, 1, 2]
     X = 1
     for cmd in data:
-        row = cycle//40
         add_cycle, delta_x = decode_cmd(cmd)
+        row = cycle//40
         for _ in range(add_cycle):
-            cycle += 1
             pxl = cycle%40
-            print(pxl, sprite_pos)
             if pxl in sprite_pos:
-                output[row] = output[row][:pxl] + '#' + output[row][pxl+1:]
-        X += delta_x 
-        sprite_pos = [X - 1, X, X + 1]
-        if cycle == 240:
-            return '\n'+ '\n'.join(output)
-    return
+                output[row] = output[row][:pxl] + '#' + output[row][pxl + 1:]
+            cycle += 1
+        X += delta_x
+        sprite_pos = [X-1, X, X+1]
+        if cycle >= 240:
+            return '\n'+ '\n'.join(output)        
+    return '\n'+ '\n'.join(output)
+    
 
 def main():
     t0 = time.perf_counter()
