@@ -91,7 +91,6 @@ def solution_part_2():
             cave[new_sand_pos[0], new_sand_pos[1]] = -1
         if new_sand_pos == [0,500]:
             return (cave == -1).sum()
-
     return (cave == -1).sum()
 
 def main():
