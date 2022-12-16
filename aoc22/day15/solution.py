@@ -3,7 +3,6 @@ import sys
 import time
 import json
 import re
-import numpy as np 
 
 try:
     script_path = os.path.dirname(__file__)
@@ -46,19 +45,14 @@ def solution_part_1():
     data = data.split('\n')
     sensosrs = []
     beacons  = []
-    mx = 0
-    mn = 0
     no_bcn_coords = set()
     for cmd in data:
         xs = [(int(k.split('=')[1])) for k in re.findall('x=-?\d+',cmd)]
         ys = [(int(k.split('=')[1])) for k in re.findall('y=-?\d+',cmd)]
         snsr = [ys[0], xs[0]]
         beac = [ys[1], xs[1]]
-        mx = max([mx]+ snsr + beac)
-        mn = min([mx]+ snsr + beac)
         sensosrs.append(snsr)
         beacons.append(beac)
-
 
     row_to_check = 2000000
     for sns, bcn in zip(sensosrs, beacons):
@@ -69,7 +63,7 @@ def solution_part_1():
                     if manhattan_dist(sns, [i,j]) <= distance:
                         if [i,j] not in beacons:
                             no_bcn_coords.add((i,j))
-
+    
     return len(no_bcn_coords)
 
     
@@ -78,16 +72,11 @@ def solution_part_2():
     data = data.split('\n')
     sensosrs = []
     beacons  = []
-    mx = 0
-    mn = 0
-    no_bcn_coords = set()
     for cmd in data:
         xs = [(int(k.split('=')[1])) for k in re.findall('x=-?\d+',cmd)]
         ys = [(int(k.split('=')[1])) for k in re.findall('y=-?\d+',cmd)]
         snsr = [ys[0], xs[0]]
         beac = [ys[1], xs[1]]
-        mx = max([mx]+ snsr + beac)
-        mn = min([mx]+ snsr + beac)
         sensosrs.append(snsr)
         beacons.append(beac)
 
@@ -97,8 +86,9 @@ def solution_part_2():
         distance =  manhattan_dist(sns, bcn)
         lines_w     = [k for k in range(0, distance + 1)] + [k for k in range(0, distance)][::-1]
         lines_coord = [k for k in range(sns[0] - distance, sns[0] + distance + 1)]
-        lines_coord = np.clip(lines_coord, coord_min, coord_max)
         for lc, lw in zip(lines_coord, lines_w):
+            if not coord_min <= lc <= coord_max:
+                continue
             if lw == 0:
                 rows[lc].append((sns[1]))
                 rows[lc] = merge_sectors(rows[lc])
