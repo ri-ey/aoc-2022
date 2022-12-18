@@ -2,7 +2,6 @@ import os
 import sys
 import time
 import json
-from itertools import zip_longest
 
 try:
     script_path = os.path.dirname(__file__)
