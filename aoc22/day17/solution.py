@@ -22,30 +22,18 @@ def falling_rock(i, height):
         left = np.array([[height, 2]])
         right = np.array([[height, 5]])
     elif curr == '+':
-        # shape = np.array([  [0 , 1, 0],\
-        #                     [1 , 1, 1],\
-        #                     [0 , 1, 0]])
         shape = np.array([[height + 1, 2], [height, 3], [height + 1, 3], [height + 2, 3], [height+ 1, 4]])
         left = np.array([[height + 1, 2]])
         right = np.array([[height + 1, 4]])
     elif curr == 'L':
-        # shape = np.array([  [0 , 0, 1],\
-        #                     [0 , 0, 1],\
-        #                     [1 , 1, 1]])
         shape = np.array([[height, 2], [height, 3], [height, 4], [height + 1, 4], [height+ 2, 4]])
         left = np.array([[height, 2]])
         right = np.array([[height, 4]])
     elif curr == 'I':
-        # shape = np.array([  [1],\
-        #                     [1],\
-        #                     [1],\
-        #                     [1]])
         shape = np.array([[height, 2], [height + 1, 2], [height + 2, 2], [height + 3, 2]])
         left = np.array([[height, 2]])
         right = np.array([[height, 2]])
     elif curr == 'S':
-        # shape = np.array([  [1 , 1,],\
-        #                     [1 , 1,]])
         shape = np.array([[height, 2], [height + 1, 2], [height, 3], [height + 1, 3]])
         left = np.array([[height, 2]])
         right = np.array([[height, 3]])
@@ -94,7 +82,6 @@ def solution_part_1():
             falling_rock_coords = falling_rock_coords + movement
             left_edge = left_edge + movement
             right_edge = right_edge + movement
-        
         for rock_piece in falling_rock_coords:
             cave[rock_piece[0], rock_piece[1]] = 1
         max_h = max(max_h, max(falling_rock_coords[:,0]))    
@@ -116,7 +103,6 @@ def solution_part_2():
         idx = num_rocks%5
         falling_rock_coords, left_edge, right_edge = falling_rock(idx, max_h + 4)
         key = idx, gas_idx     
-        
         if key in states:
             old_num_rocks, old_max_h = states[key]
             cycle = old_num_rocks - num_rocks
@@ -140,18 +126,14 @@ def solution_part_2():
             left_edge = left_edge + movement
             right_edge = right_edge + movement
             movement = np.array([-1,0])
-
             for rock_piece in falling_rock_coords:
                 if cave[rock_piece[0] - 1, rock_piece[1]] == 1:
                     stop = True
                     break
-
             gas_idx += 1
             gas_idx = gas_idx%gas_n 
-
             if stop:
                 break
-
             falling_rock_coords = falling_rock_coords + movement
             left_edge = left_edge + movement
             right_edge = right_edge + movement

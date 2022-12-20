@@ -107,12 +107,11 @@ def part_2(targets, nodes_w_flow_distances, nodes_to_idx, nodes):
         visited = visited | {current}
         targets = targets - visited
 
-        torecord = frozenset(visited - {"AA"})
-        if torecord in best_26_mins_paths:
-            best_26_mins_paths[torecord] = max(best_26_mins_paths[torecord], pressure_now)
+        to_record = frozenset(visited - {"AA"})
+        if to_record in best_26_mins_paths:
+            best_26_mins_paths[to_record] = max(best_26_mins_paths[to_record], pressure_now)
         else:
-            best_26_mins_paths[torecord] = pressure_now
-
+            best_26_mins_paths[to_record] = pressure_now
         best_pressure = 0
         for target in targets:
             time_left = time - nodes_w_flow_distances[current][nodes_to_idx[target]] - 1
